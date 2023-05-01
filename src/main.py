@@ -5,7 +5,7 @@ from src.postgres_db import PostgresDB
 repos = get_repos_stats('satel31')
 
 #сохранения данных в базу данных
-PASSWORD = 'Starwars31!@1997'
+PASSWORD = ''
 db = PostgresDB(host='localhost', db_name='test', user='postgres', password=PASSWORD, table_name='test_gh')
 db.insert_data_to_db(repos)
 
