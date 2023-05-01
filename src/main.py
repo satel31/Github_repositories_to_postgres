@@ -6,6 +6,7 @@ repos = get_repos_stats('satel31')
 
 #сохранения данных в базу данных
 PASSWORD = 'Starwars31!@1997'
+
 db = PostgresDB(host='localhost', db_name='test', user='postgres', password=PASSWORD, table_name='test_gh')
 db.insert_data_to_db(repos)
 
@@ -15,3 +16,6 @@ print(db.read_db())
 print(db.read_db('forks', 3))
 print(db.read_db('forks'))
 print(db.read_db(3))
+
+if __name__ == '__main__':
+    main()

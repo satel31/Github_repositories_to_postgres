@@ -44,7 +44,7 @@ class PostgresDB:
         """Экспортировать данные в формат JSON"""
         file = f'{self.table_name}.json'
         repos_dict = self.read_db()
-        with open(file, 'w', encoding='utf-8') as f:
+        with open(file, 'a', encoding='utf-8') as f:
             json.dump(repos_dict, f, ensure_ascii=False)
 
     def read_db(self, sort_by: str = None, limit: int = None):
