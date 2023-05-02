@@ -9,7 +9,7 @@ class PostgresDB:
         self.conn = psycopg2.connect(host=host, database=dbname, user=user, password=password, port=port)
         self.cur = self.conn.cursor()
         self.conn.autocommit = True
-        self.table_name = table_name
+        self.table_name: str = table_name
 
         self.create_table()
 
@@ -27,7 +27,7 @@ class PostgresDB:
                 )
             """)
 
-    def insert_data_to_db(self, repositories):
+    def insert_data_to_db(self, repositories: list[dict]):
         """Добавить данные в таблицу"""
         with self.conn:
             for repository in repositories:
@@ -43,7 +43,7 @@ class PostgresDB:
     def insert_data_to_json(self):
         """Экспортировать данные в формат JSON"""
         file = f'{self.table_name}.json'
-        repos_dict = self.read_db()
+        repos_dict: list[dict] = self.read_db()
         with open(file, 'a', encoding='utf-8') as f:
             json.dump(repos_dict, f, ensure_ascii=False)
 
@@ -58,7 +58,7 @@ class PostgresDB:
                 self.cur.execute(f"""SELECT * FROM {self.table_name} LIMIT {limit}""")
             else:
                 self.cur.execute(f"""SELECT * FROM {self.table_name}""")
-            repos_data = self.cur.fetchall()
+            repos_data: list[tuple] = self.cur.fetchall()
             repos_dict = []
             for data in repos_data:
                 repos_dict.append({'repository_id': data[0],
