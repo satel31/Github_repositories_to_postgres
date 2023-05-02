@@ -5,8 +5,8 @@ import psycopg2
 class PostgresDB:
     """Обеспечивает взаимодействие с базой данных Postgres"""
 
-    def __init__(self, db_name: str, password: str, table_name: str, host: str = 'localhost', user: str = 'postgres'):
-        self.conn = psycopg2.connect(host=host, database=db_name, user=user, password=password)
+    def __init__(self, table_name: str, dbname: str, user: str, password: str, host: str = 'localhost', port: str = '5432'):
+        self.conn = psycopg2.connect(host=host, database=dbname, user=user, password=password, port=port)
         self.cur = self.conn.cursor()
         self.conn.autocommit = True
         self.table_name = table_name
